@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Roster | Team Beast Clothing — Sponsored Players & Ambassadors</title>
+  <meta name="description" content="Meet the Team Beast roster — sponsored dart players, brand ambassadors, and BMX riders who rep the Beast. Apply to be sponsored." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html" aria-current="page">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <img class="wm" src="teambeast_original.png" alt="" />
+    <div class="inner">
+      <p class="eyebrow">Worn by champions</p>
+      <h1>The <i>roster.</i></h1>
+      <p>Sponsored dart players, brand ambassadors, and BMX riders who rep the Beast week in, week out. Tap a name to see their bio and the kit they wear.</p>
+    </div>
+  </section>
+
+  <main class="wrap section">
+    <div class="cat-row" id="filters">
+      <button class="cat" data-g="all" aria-pressed="true">All</button>
+      <button class="cat" data-g="player" aria-pressed="false">Sponsored Players</button>
+      <button class="cat" data-g="ambassador" aria-pressed="false">Ambassadors</button>
+      <button class="cat" data-g="rider" aria-pressed="false">BMX Riders</button>
+    </div>
+    <div class="roster" id="roster"></div>
+
+    <div class="panel reveal" id="apply" style="margin-top:48px">
+      <p class="eyebrow">Join the Beast</p>
+      <h2 style="font-weight:900;font-size:clamp(1.6rem,3.4vw,2.4rem);text-transform:uppercase;letter-spacing:-0.02em">Apply to be sponsored.</h2>
+      <p style="color:var(--ink-2);margin:14px 0 22px;max-width:54ch">Throw darts, ride BMX, or build community for the Beast? Tell us about your game and where you compete — standout players and ambassadors get kit, sponsorship, and a spot on this page.</p>
+      <form class="form-grid" id="apply-form" novalidate style="max-width:640px">
+        <div class="form-row">
+          <div class="field"><label for="an">Name</label><input id="an" name="name" type="text" autocomplete="name" required /></div>
+          <div class="field"><label for="as">Sport</label>
+            <select id="as" name="sport" required><option value="" selected disabled>Choose…</option><option>Darts</option><option>BMX</option><option>Other</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="ae">Email</label><input id="ae" name="email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="ah">Instagram / handle</label><input id="ah" name="handle" type="text" /></div>
+        </div>
+        <div class="field"><label for="am">Tell us about your game</label><textarea id="am" name="message" placeholder="Where you compete, results, why you rep the Beast…"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">Apply to be sponsored</button>
+        <p class="form-note" id="apply-note" role="status" aria-live="polite">We reply to every application. No spam.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing-data.js"></script>
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    var roster = window.TBC_ROSTER || [];
+    var grid = document.getElementById("roster");
+    var WM = "base_textfree.png";
+    function card(p) {
+      var cls = p.group === "ambassador" ? "is-amb" : (p.group === "rider" ? "is-rider" : "");
+      var img = p.photo ? p.photo : WM;
+      return '<a class="player-card ' + cls + '" href="clothing-player.html?p=' + p.slug + '" aria-label="' + p.name + '">' +
+        '<img class="wm" src="' + img + '" alt="" />' +
+        '<span class="pnum">' + p.no + '</span>' +
+        '<div><p class="role">' + p.role + '</p><h3>' + p.name + '</h3><p class="sport">' + p.sport + '</p>' +
+        '<span class="go">View</span></div></a>';
+    }
+    function render(group) {
+      var list = group === "all" ? roster : roster.filter(function (p) { return p.group === group; });
+      grid.innerHTML = list.map(card).join("");
+    }
+    render("all");
+    var filters = document.getElementById("filters");
+    filters.addEventListener("click", function (e) {
+      var b = e.target.closest(".cat"); if (!b) return;
+      filters.querySelectorAll(".cat").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render(b.dataset.g);
+    });
+    var f = document.getElementById("apply-form");
+    if (f) f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var note = document.getElementById("apply-note");
+      if (!f.checkValidity()) { note.textContent = "Add your name, sport, and email."; return; }
+      note.textContent = "Application sent — we'll be in touch. Welcome to the hunt."; note.classList.add("ok"); f.reset();
+    });
+  })();
+  </script>
+</body>
+</html>
