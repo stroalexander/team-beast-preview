@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Team Beast Clothing — Team Quotes & Custom Orders</title>
+  <meta name="description" content="Contact Team Beast Clothing for custom kits, team quotes, and orders. Auburn, WA. Call 206-439-8555 or email info@teambclothing.com." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+  <style>
+    .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--gap)}
+    @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html" aria-current="page">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <img class="wm" src="base_textfree.png" alt="" style="object-position:80% 40%" />
+    <div class="inner">
+      <p class="eyebrow">Let's talk kit</p>
+      <h1>Get a <i>quote.</i></h1>
+      <p>Outfit one player or a whole roster. Tell us what you need and we'll reply with options, pricing, and turnaround. No card charged here.</p>
+    </div>
+  </section>
+
+  <main class="wrap section">
+    <div class="contact-grid">
+      <div class="panel reveal">
+        <form class="form-grid" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="cn">Your name</label><input id="cn" name="name" type="text" autocomplete="name" required /></div>
+            <div class="field"><label for="cw">What do you need?</label>
+              <select id="cw" name="need" required><option value="" selected disabled>Choose…</option><option>Shop order</option><option>Custom kit</option><option>Full team quote</option><option>Sponsorship</option><option>Something else</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="ce">Email</label><input id="ce" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="cp">Phone</label><input id="cp" name="phone" type="tel" autocomplete="tel" /></div>
+          </div>
+          <div class="field"><label for="cm">Tell us about it</label><textarea id="cm" name="message" placeholder="How many kits, which sport, colors, names &amp; numbers, deadline…"></textarea></div>
+          <button type="submit" class="btn btn-primary btn-block">Send it over</button>
+          <p class="form-note" id="cnote" role="status" aria-live="polite">We reply within two business days. No spam, ever.</p>
+        </form>
+      </div>
+
+      <div class="panel reveal" data-d="1">
+        <ul class="contact-list">
+          <li><span class="k">Call</span><a class="v" href="tel:+12064398555">206-439-8555</a></li>
+          <li><span class="k">Email</span><a class="v" href="mailto:info@teambclothing.com">info@teambclothing.com</a></li>
+          <li><span class="k">Where</span><span class="v">Auburn, Washington</span></li>
+          <li><span class="k">Follow</span><span class="v"><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a></span></li>
+          <li><span class="k">Also by RamLyn</span><span class="v">Phoenix Darts</span></li>
+        </ul>
+        <p class="form-note" style="margin-top:22px">Prefer to browse first? <a href="clothing-merch.html" style="color:var(--green)">Shop the drop</a> or <a href="clothing-creator.html" style="color:var(--green)">build your kit</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    var f = document.getElementById("contact-form");
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var note = document.getElementById("cnote");
+      if (!f.checkValidity()) { note.textContent = "Add your name, email, and what you need."; return; }
+      var d = new FormData(f);
+      var body = "Team Beast Clothing inquiry:\n\nName: " + d.get("name") + "\nNeed: " + d.get("need") +
+        "\nEmail: " + d.get("email") + "\nPhone: " + (d.get("phone") || "") + "\n\n" + (d.get("message") || "");
+      window.location.href = "mailto:info@teambclothing.com?subject=" +
+        encodeURIComponent("Team Beast inquiry - " + d.get("need")) + "&body=" + encodeURIComponent(body);
+      note.textContent = "Opening your email. Send it and we'll be in touch."; note.classList.add("ok");
+    });
+  })();
+  </script>
+</body>
+</html>
