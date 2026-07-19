@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player | Team Beast Clothing</title>
+  <meta name="description" content="A Team Beast sponsored player — bio and the kit they wear." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html" aria-current="page">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <main class="wrap section" id="player-root">
+    <!-- rendered by JS -->
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing-data.js"></script>
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    var roster = window.TBC_ROSTER || [], CAT = window.TBC_CATALOG || {};
+    var slug = new URLSearchParams(location.search).get("p");
+    var p = roster.filter(function (x) { return x.slug === slug; })[0];
+    var root = document.getElementById("player-root");
+    var money = function (c) { return "$" + (c / 100).toFixed(2).replace(/\.00$/, ""); };
+
+    if (!p) {
+      root.innerHTML = '<div class="page-hero" style="border-radius:16px;overflow:hidden"><img class="wm" src="teambeast_original.png" alt=""><div class="inner"><p class="eyebrow">Not found</p><h1>Player not found.</h1><p>That roster spot doesn\'t exist. Head back to the full roster.</p><p style="margin-top:20px"><a class="btn btn-primary" href="clothing-sponsored.html">← Back to the roster</a></p></div></div>';
+      document.title = "Player not found | Team Beast Clothing";
+      return;
+    }
+    document.title = p.name + " | Team Beast Clothing";
+    var portrait = p.photo ? p.photo : "teambeast_original.png";
+
+    var wears = (p.wears || []).map(function (id) {
+      var prod = CAT[id]; if (!prod) return "";
+      return '<article class="prod">' +
+        '<div class="ph"><img class="wm" src="base_textfree.png" alt=""><span class="tag">' + prod.sport + '</span><span class="no">' + prod.no + '</span></div>' +
+        '<div class="body"><h3>' + prod.name + '</h3><span class="spec">' + prod.spec + '</span>' +
+        '<div class="row"><span class="price">' + money(prod.price) + '<small>USD</small></span>' +
+        '<button class="btn btn-sm btn-primary" data-add="' + id + '">Add</button></div></div></article>';
+    }).join("");
+
+    root.innerHTML =
+      '<div class="player-hero">' +
+        '<div class="player-portrait"><img class="wm" src="' + portrait + '" alt="' + p.name + '"><span class="big-no">' + p.no + '</span></div>' +
+        '<div class="player-info">' +
+          '<p class="role">' + p.role + '</p>' +
+          '<h1>' + p.name + '</h1>' +
+          '<dl class="meta"><div><dt>Sport</dt><dd>' + p.sport + '</dd></div><div><dt>Number</dt><dd>' + p.no + '</dd></div><div><dt>Reps</dt><dd>Team Beast</dd></div></dl>' +
+          '<p class="bio">' + p.bio + '</p>' +
+          '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">' +
+            '<a class="btn btn-primary" href="clothing-merch.html">Shop the kit</a>' +
+            '<a class="btn btn-ghost" href="clothing-sponsored.html#apply">Become sponsored</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<section class="section"><div class="section-head"><p class="eyebrow">In their bag</p><h2>What ' + p.name.split(" ")[0] + ' <i>wears.</i></h2></div>' +
+      '<div class="wears">' + wears + '</div></section>';
+
+    // size defaults to M for quick-add from a player page
+    root.querySelectorAll("[data-add]").forEach(function (b) {
+      b.addEventListener("click", function () { window.TBC_addToCart(b.dataset.add, "M", 1); });
+    });
+  })();
+  </script>
+</body>
+</html>
