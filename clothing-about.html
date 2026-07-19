@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Team Beast Clothing — A RamLyn Brand, Auburn WA</title>
+  <meta name="description" content="Team Beast Clothing is a RamLyn brand — family-owned in Auburn, WA with 50+ years of custom craftsmanship. Custom sublimation & DTF apparel, and the home of Phoenix Darts." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+  <style>
+    .stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+    .stat-band .s{background:var(--tile);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+    .stat-band .s b{font-family:var(--display);font-size:clamp(2rem,4vw,3.2rem);color:var(--green);display:block;line-height:1}
+    .stat-band .s span{font-weight:500;font-size:.84rem;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+    .proc{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+    .proc .c{background:var(--tile);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:transform .3s,border-color .3s}
+    .proc .c:hover{transform:translateY(-5px);border-color:var(--green)}
+    .proc .c .n{font-family:var(--display);color:var(--green);font-size:1.1rem}
+    .proc .c h3{font-weight:800;text-transform:uppercase;font-size:1.15rem;margin:10px 0 8px}
+    .proc .c p{color:var(--ink-2);font-size:.96rem}
+    @media (max-width:860px){.stat-band{grid-template-columns:repeat(2,1fr)}.proc{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html">Roster</a>
+      <a href="clothing-about.html" aria-current="page">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <img class="wm" src="teambeast_original.png" alt="" />
+    <div class="inner">
+      <p class="eyebrow">Who we are</p>
+      <h1>Family-made. <i>Beast-built.</i></h1>
+      <p>Team Beast Clothing is an exclusive <b>RamLyn</b> brand: a family-owned shop with 50+ years of custom craftsmanship in Auburn, Washington. We also own and operate <b>Phoenix Darts</b>.</p>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="section">
+      <div class="stat-band">
+        <div class="s reveal"><b>50+</b><span>Years family-owned</span></div>
+        <div class="s reveal" data-d="1"><b>18</b><span>Sponsored athletes</span></div>
+        <div class="s reveal" data-d="2"><b>2</b><span>Print methods</span></div>
+        <div class="s reveal" data-d="3"><b>1</b><span>Beast standard</span></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="section-head reveal"><p class="eyebrow">The story</p><h2>Half a century of <i>craft.</i></h2></div>
+      <div class="reveal" style="max-width:70ch;color:var(--ink-2);font-size:1.1rem;line-height:1.7;display:grid;gap:18px">
+        <p>RamLyn started in engraving, signage, awards, and personalized accessories, built on craftsmanship and a commitment to the local community. Five decades later, that same shop turns out custom apparel for players who take their game seriously.</p>
+        <p>Team Beast Clothing is where that heritage meets the competitive world of darts and BMX. We dress the players, build the team kits, and back a full roster of sponsored athletes and ambassadors. Through Phoenix Darts, the Beast runs deep into the venues, leagues, and tournaments where the action happens.</p>
+        <p style="color:var(--ink);font-weight:600">It's a family business with a competitive heart, and a simple promise: <span class="grad-g">hit the mark.</span></p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="section-head reveal"><p class="eyebrow">How we make it</p><h2>Printed to <i>last.</i></h2></div>
+      <div class="proc">
+        <div class="c reveal"><span class="n">Permanent</span><h3>Full sublimation</h3><p>Color dyed into the fibers, edge to edge. Names, numbers, and team colors that won't crack, peel, or fade after a season of wins.</p></div>
+        <div class="c reveal" data-d="1"><span class="n">Vivid</span><h3>DTF print</h3><p>Bold, vivid one-offs and small runs on tees and hoodies. Sharp graphics with a soft hand that hold up wash after wash.</p></div>
+        <div class="c reveal" data-d="2"><span class="n">Local</span><h3>Made to order</h3><p>One player or a full roster. Consistent kits across the team, real turnaround, real people, no drop-ship gamble.</p></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="panel reveal" style="text-align:center">
+        <p class="eyebrow" style="justify-content:center">Ready when you are</p>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4vw,3rem);text-transform:uppercase;letter-spacing:-0.02em">Suit up your team.</h2>
+        <p style="color:var(--ink-2);max-width:48ch;margin:14px auto 24px">Grab a kit off the drop, design your own, or ask us for a full team quote.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="clothing-creator.html">Build your kit</a>
+          <a class="btn btn-ghost" href="clothing-contact.html">Request a quote</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing.js"></script>
+</body>
+</html>
