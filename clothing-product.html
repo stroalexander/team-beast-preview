@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product | Team Beast Clothing</title>
+  <meta name="description" content="Team Beast Clothing product — the story behind the shirt, who on the roster wears it, and how to order yours." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html" aria-current="page">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <main class="wrap section" id="product-root">
+    <!-- rendered by JS -->
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing-data.js"></script>
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var CAT = window.TBC_CATALOG || {};
+    var ROSTER = window.TBC_ROSTER || [];
+    var SIZES = ["S", "M", "L", "XL", "2XL"];
+    var id = new URLSearchParams(location.search).get("id");
+    var p = CAT[id];
+    var root = document.getElementById("product-root");
+    var money = function (c) { return "$" + (c / 100).toFixed(2).replace(/\.00$/, ""); };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (m) { return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[m]; }); };
+
+    if (!p) {
+      root.innerHTML =
+        '<div class="page-hero" style="border-radius:16px;overflow:hidden"><img class="wm" src="teambeast_original.png" alt="">' +
+        '<div class="inner"><p class="eyebrow">Not found</p><h1>Product not found.</h1>' +
+        '<p>That drop doesn\'t exist (or sold through). Head back to the shop and pick your weapon.</p>' +
+        '<p style="margin-top:20px"><a class="btn btn-primary" href="clothing-merch.html">← Back to the shop</a></p></div></div>';
+      document.title = "Product not found | Team Beast Clothing";
+      return;
+    }
+
+    document.title = p.name + " | Team Beast Clothing";
+
+    /* Who wears it — reverse lookup against the roster's wears[] lists. */
+    var wornBy = ROSTER.filter(function (m) { return (m.wears || []).indexOf(id) !== -1; });
+    var wornChips = wornBy.map(function (m) {
+      return '<a class="worn-chip" href="clothing-player.html?p=' + esc(m.slug) + '">' +
+        '<span class="wc-no">' + esc(m.no) + '</span>' +
+        '<span class="wc-txt"><b>' + esc(m.name) + '</b><small>' + esc(m.role) + '</small></span></a>';
+    }).join("");
+
+    var img = p.img ? esc(p.img) : "base_textfree.png";
+    var sizeChips = SIZES.map(function (s, i) {
+      return '<button type="button" data-size="' + s + '" aria-pressed="' + (i === 1 ? "true" : "false") + '">' + s + '</button>';
+    }).join("");
+
+    root.innerHTML =
+      '<p class="crumb"><a href="clothing-merch.html">Shop</a> <span>/</span> ' + esc(p.sport) + ' <span>/</span> ' + esc(p.name) + '</p>' +
+      '<div class="pd">' +
+        '<div class="pd-visual">' +
+          '<img class="wm" src="' + img + '" alt="' + esc(p.name) + '">' +
+          '<span class="tag">' + esc(p.sport) + '</span>' +
+          '<span class="no">' + esc(p.no) + '</span>' +
+        '</div>' +
+        '<div class="pd-info">' +
+          '<p class="eyebrow">' + esc(p.sport) + ' · ' + esc(p.spec) + '</p>' +
+          '<h1>' + esc(p.name) + '</h1>' +
+          '<p class="pd-price">' + money(p.price) + ' <small>USD · estimated, confirmed on your quote</small></p>' +
+          '<div class="pd-story"><h3>The story</h3><p>' + esc(p.story || "Story coming soon — this one earns its stripes at the next event.") + '</p></div>' +
+          (wornChips
+            ? '<div class="pd-worn"><h3>Worn by</h3><div class="worn-row">' + wornChips + '</div></div>'
+            : '<div class="pd-worn"><h3>Worn by</h3><p class="form-note">Not claimed by the roster yet — be the first. <a href="clothing-sponsored.html#apply" style="color:var(--green)">Apply to be sponsored →</a></p></div>') +
+          '<div class="pd-buy">' +
+            '<div class="lbl"><span>Size</span></div>' +
+            '<div class="sizes" id="pd-sizes">' + sizeChips + '</div>' +
+            '<div class="pd-buy-row">' +
+              '<label class="qty-field" for="pd-qty">Qty <input id="pd-qty" type="number" min="1" max="99" value="1"></label>' +
+              '<button class="btn btn-primary" id="pd-add">Add to bag — <span id="pd-line-price">' + money(p.price) + '</span></button>' +
+            '</div>' +
+            '<p class="form-note">Want your name &amp; number on it? <a href="clothing-creator.html" style="color:var(--green)">Build it in Creator Mode →</a></p>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<section class="section" id="related-sec"><div class="section-head"><p class="eyebrow">Complete the kit</p><h2>Goes <i>with it.</i></h2></div>' +
+      '<div class="shop-grid" id="related"></div></section>';
+
+    /* size selection */
+    var sizesEl = document.getElementById("pd-sizes");
+    sizesEl.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      sizesEl.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    });
+
+    /* qty → live line price */
+    var qtyEl = document.getElementById("pd-qty");
+    qtyEl.addEventListener("input", function () {
+      var q = Math.max(1, Math.min(99, parseInt(qtyEl.value, 10) || 1));
+      document.getElementById("pd-line-price").textContent = money(p.price * q);
+    });
+
+    /* add to bag */
+    document.getElementById("pd-add").addEventListener("click", function () {
+      var sel = sizesEl.querySelector('button[aria-pressed="true"]');
+      var q = Math.max(1, Math.min(99, parseInt(qtyEl.value, 10) || 1));
+      window.TBC_addToCart(id, sel ? sel.dataset.size : "M", q);
+    });
+
+    /* related: same sport first, then the rest — max 3 */
+    var related = Object.keys(CAT)
+      .filter(function (k) { return k !== id; })
+      .map(function (k) { return Object.assign({ id: k }, CAT[k]); })
+      .sort(function (a, b) { return (b.sport === p.sport) - (a.sport === p.sport); })
+      .slice(0, 3);
+    document.getElementById("related").innerHTML = related.map(function (r) {
+      var rimg = r.img ? esc(r.img) : "base_textfree.png";
+      return '<article class="prod">' +
+        '<a class="ph" href="clothing-product.html?id=' + esc(r.id) + '" aria-label="' + esc(r.name) + '">' +
+          '<img class="wm" src="' + rimg + '" alt=""><span class="tag">' + esc(r.sport) + '</span><span class="no">' + esc(r.no) + '</span></a>' +
+        '<div class="body"><h3><a href="clothing-product.html?id=' + esc(r.id) + '">' + esc(r.name) + '</a></h3>' +
+        '<span class="spec">' + esc(r.spec) + '</span>' +
+        '<div class="row"><span class="price">' + money(r.price) + '<small>USD</small></span>' +
+        '<a class="btn btn-sm btn-ghost" href="clothing-product.html?id=' + esc(r.id) + '">The story</a></div></div></article>';
+    }).join("");
+  })();
+  </script>
+</body>
+</html>
