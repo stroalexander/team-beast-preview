@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creator Mode | Team Beast Clothing — Design Your Shirt on the Beast</title>
+  <meta name="description" content="Design your own Team Beast shirt and see it live on the Beast mascot — your colors, graphic, name, and number. Custom sublimated, made to order in Auburn, WA." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html">Shop</a>
+      <a href="clothing-creator.html" aria-current="page">Create</a>
+      <a href="clothing-sponsored.html">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <img class="wm" src="base_textfree.png" alt="" style="object-position:15% 40%" />
+    <div class="inner">
+      <p class="eyebrow">Creator mode</p>
+      <h1>Put it on <i>the beast.</i></h1>
+      <p>Design your shirt and watch the Beast wear it live — your colors, your graphic, your name and number. Add it to your bag or send it over and we'll confirm the artwork and quote your run.</p>
+    </div>
+  </section>
+
+  <main class="wrap section">
+    <div class="creator">
+
+      <!-- ================= MASCOT STAGE ================= -->
+      <div class="mascot-stage" aria-label="Live preview of your design worn by the Beast mascot">
+        <div class="stage-aura" id="stage-aura"></div>
+        <svg id="beast-svg" viewBox="0 0 440 600" role="img" aria-label="The Beast mascot wearing your custom shirt" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="furShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#23232e"/><stop offset="1" stop-color="#121219"/>
+            </linearGradient>
+            <linearGradient id="shirtShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(255,255,255,0.10)"/><stop offset=".5" stop-color="rgba(255,255,255,0)"/><stop offset="1" stop-color="rgba(0,0,0,0.28)"/>
+            </linearGradient>
+            <filter id="eyeGlow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- ground shadow -->
+          <ellipse cx="220" cy="574" rx="150" ry="16" fill="rgba(0,0,0,0.5)"/>
+
+          <!-- ARMS (fur, behind shirt) -->
+          <g fill="url(#furShade)" stroke="#2c2c38" stroke-width="2">
+            <path d="M96 250 L60 320 L48 408 L74 470 L108 462 L96 396 L112 330 Z"/>
+            <path d="M344 250 L380 320 L392 408 L366 470 L332 462 L344 396 L328 330 Z"/>
+          </g>
+          <!-- fists -->
+          <g fill="#1a1a24" stroke="#2c2c38" stroke-width="2">
+            <path d="M56 460 L96 452 L104 486 L84 506 L58 498 Z"/>
+            <path d="M384 460 L344 452 L336 486 L356 506 L382 498 Z"/>
+          </g>
+          <!-- claws -->
+          <g fill="#e8eaf2">
+            <path d="M62 498 L56 514 L70 504 Z"/><path d="M78 502 L74 518 L88 508 Z"/>
+            <path d="M378 498 L384 514 L370 504 Z"/><path d="M362 502 L366 518 L352 508 Z"/>
+          </g>
+
+          <!-- SHIRT -->
+          <g id="shirt">
+            <!-- sleeves -->
+            <path id="sleeve-l" d="M126 218 L84 246 L96 322 L146 306 L140 246 Z"/>
+            <path id="sleeve-r" d="M314 218 L356 246 L344 322 L294 306 L300 246 Z"/>
+            <!-- long-sleeve extensions (hidden unless Long sleeve) -->
+            <path id="sleeve-l-long" d="M96 322 L84 400 L118 408 L146 306 Z" style="display:none"/>
+            <path id="sleeve-r-long" d="M344 322 L356 400 L322 408 L294 306 Z" style="display:none"/>
+            <!-- cuffs (trim) -->
+            <path id="cuff-l" class="trim" d="M96 322 L146 306 L142 292 L98 306 Z"/>
+            <path id="cuff-r" class="trim" d="M344 322 L294 306 L298 292 L342 306 Z"/>
+            <!-- body -->
+            <path id="shirt-body" d="M140 214 L220 200 L300 214 L312 300 L302 468 L138 468 L128 300 Z"/>
+            <path d="M140 214 L220 200 L300 214 L312 300 L302 468 L138 468 L128 300 Z" fill="url(#shirtShade)" pointer-events="none"/>
+            <!-- side panels (trim) -->
+            <path id="panel-l" class="trim" d="M128 300 L138 468 L152 468 L143 302 Z" opacity=".9"/>
+            <path id="panel-r" class="trim" d="M312 300 L302 468 L288 468 L297 302 Z" opacity=".9"/>
+            <!-- hem band (trim) -->
+            <path id="hem" class="trim" d="M138 468 L302 468 L302 456 L138 456 Z" opacity=".9"/>
+            <!-- collars: crew / v / zip -->
+            <path id="collar-crew" class="trim" d="M176 208 Q220 232 264 208 L258 196 Q220 216 182 196 Z"/>
+            <path id="collar-v" class="trim" d="M178 206 L220 252 L262 206 L252 198 L220 234 L188 198 Z" style="display:none"/>
+            <g id="collar-zip" style="display:none">
+              <path class="trim" d="M176 208 Q220 230 264 208 L258 196 Q220 214 182 196 Z"/>
+              <rect x="216" y="212" width="8" height="70" class="trim"/>
+              <rect x="214" y="278" width="12" height="10" rx="2" fill="#c9ccd6"/>
+            </g>
+
+            <!-- CHEST PRINT -->
+            <g id="print" text-anchor="middle">
+              <g id="gfx"></g>
+              <text id="p-name" x="220" y="268" font-family="Oswald, Arial Narrow, sans-serif" font-size="24" font-weight="700" letter-spacing="3">BEAST</text>
+              <text id="p-num" x="220" y="392" font-family="Oswald, Arial Narrow, sans-serif" font-size="118" font-weight="700" letter-spacing="-2">01</text>
+            </g>
+          </g>
+
+          <!-- HEAD (in front of collar) -->
+          <g id="head">
+            <!-- ears -->
+            <path d="M142 92 L120 20 L184 66 Z" fill="url(#furShade)" stroke="#2c2c38" stroke-width="2"/>
+            <path d="M298 92 L320 20 L256 66 Z" fill="url(#furShade)" stroke="#2c2c38" stroke-width="2"/>
+            <path d="M148 82 L136 40 L172 68 Z" fill="#0d0d13"/>
+            <path d="M292 82 L304 40 L268 68 Z" fill="#0d0d13"/>
+            <!-- skull -->
+            <path d="M138 96 L220 60 L302 96 L308 150 L282 196 L246 214 L220 220 L194 214 L158 196 L132 150 Z" fill="url(#furShade)" stroke="#2c2c38" stroke-width="2"/>
+            <!-- brow ridge -->
+            <path d="M150 118 L214 100 L206 122 L162 132 Z" fill="#0f0f16"/>
+            <path d="M290 118 L226 100 L234 122 L278 132 Z" fill="#0f0f16"/>
+            <!-- eyes -->
+            <g filter="url(#eyeGlow)">
+              <path id="eye-l" d="M164 132 L206 124 L200 142 L170 144 Z" fill="#b6ff2e"/>
+              <path id="eye-r" d="M276 132 L234 124 L240 142 L270 144 Z" fill="#b6ff2e"/>
+            </g>
+            <!-- muzzle -->
+            <path d="M186 156 L220 148 L254 156 L262 190 L236 212 L220 216 L204 212 L178 190 Z" fill="#181820" stroke="#2c2c38" stroke-width="2"/>
+            <!-- nose -->
+            <path d="M206 160 L234 160 L226 174 L214 174 Z" fill="#0a0a10"/>
+            <!-- snarl + fangs -->
+            <path d="M184 190 L220 200 L256 190 L250 200 L220 210 L190 200 Z" fill="#0a0a10"/>
+            <path d="M192 193 L198 208 L204 196 Z" fill="#e8eaf2"/>
+            <path d="M248 193 L242 208 L236 196 Z" fill="#e8eaf2"/>
+            <!-- cheek fur spikes -->
+            <path d="M138 150 L112 168 L140 172 Z" fill="url(#furShade)"/>
+            <path d="M302 150 L328 168 L300 172 Z" fill="url(#furShade)"/>
+          </g>
+        </svg>
+
+        <div class="stage-foot">
+          <div>
+            <span class="form-note">Estimated, per shirt</span>
+            <span class="stage-price" id="price">$69</span>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="save-png">Save design (PNG)</button>
+        </div>
+      </div>
+
+      <!-- ================= CONTROLS ================= -->
+      <form class="builder-opts" id="builder" novalidate>
+        <div class="opt-group"><div class="lbl"><span>Style</span></div>
+          <div class="opt-row" data-opt="style">
+            <button class="opt" type="button" aria-pressed="true">Jersey</button>
+            <button class="opt" type="button" aria-pressed="false">Tee</button>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-bottom:22px">
+          <div class="field"><label for="bname">Name on shirt</label><input id="bname" maxlength="12" placeholder="BEAST" autocomplete="off" /></div>
+          <div class="field"><label for="bnum">Number</label><input id="bnum" maxlength="2" inputmode="numeric" placeholder="01" autocomplete="off" /></div>
+        </div>
+
+        <div class="opt-group"><div class="lbl"><span>Base color</span></div>
+          <div class="opt-row swatch-row" id="colors" role="radiogroup" aria-label="Base color"></div>
+        </div>
+        <div class="opt-group"><div class="lbl"><span>Trim color</span> <span class="lbl-hint">collar · cuffs · side panels</span></div>
+          <div class="opt-row swatch-row" id="trims" role="radiogroup" aria-label="Trim color"></div>
+        </div>
+
+        <div class="opt-group"><div class="lbl"><span>Chest graphic</span></div>
+          <div class="opt-row" data-opt="gfx">
+            <button class="opt" type="button" aria-pressed="false">None</button>
+            <button class="opt" type="button" aria-pressed="true">Phoenix target</button>
+            <button class="opt" type="button" aria-pressed="false">Bolt</button>
+            <button class="opt" type="button" aria-pressed="false">Claw marks</button>
+          </div>
+        </div>
+
+        <div class="opt-group"><div class="lbl"><span>Collar</span></div>
+          <div class="opt-row" data-opt="collar">
+            <button class="opt" type="button" aria-pressed="true">Crew</button>
+            <button class="opt" type="button" aria-pressed="false">V-neck</button>
+            <button class="opt" type="button" aria-pressed="false">Zip</button>
+          </div>
+        </div>
+        <div class="opt-group"><div class="lbl"><span>Sleeve</span></div>
+          <div class="opt-row" data-opt="sleeve">
+            <button class="opt" type="button" aria-pressed="true">Short</button>
+            <button class="opt" type="button" aria-pressed="false">Long</button>
+            <button class="opt" type="button" aria-pressed="false">Sleeveless</button>
+          </div>
+        </div>
+        <div class="opt-group"><div class="lbl"><span>Sport</span></div>
+          <div class="opt-row" data-opt="sport">
+            <button class="opt" type="button" aria-pressed="true">Darts</button>
+            <button class="opt" type="button" aria-pressed="false">BMX</button>
+            <button class="opt" type="button" aria-pressed="false">Bowling</button>
+            <button class="opt" type="button" aria-pressed="false">Other</button>
+          </div>
+        </div>
+        <div class="opt-group"><div class="lbl"><span>Size</span></div>
+          <div class="opt-row" data-opt="size">
+            <button class="opt" type="button" aria-pressed="false">S</button>
+            <button class="opt" type="button" aria-pressed="true">M</button>
+            <button class="opt" type="button" aria-pressed="false">L</button>
+            <button class="opt" type="button" aria-pressed="false">XL</button>
+            <button class="opt" type="button" aria-pressed="false">2XL</button>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-bottom:22px">
+          <div class="field"><label for="bqty">Quantity</label><input id="bqty" type="number" min="1" max="99" value="1" /></div>
+          <div class="field"><label for="bemail">Your email <span class="lbl-hint">(for quote requests)</span></label><input id="bemail" type="email" placeholder="you@email.com" autocomplete="email" /></div>
+        </div>
+
+        <div class="creator-actions">
+          <button type="button" class="btn btn-primary btn-block" id="add-bag">Add to bag</button>
+          <button type="submit" class="btn btn-ghost btn-block">Request a quote by email</button>
+        </div>
+        <p class="form-note" id="bnote" role="status" aria-live="polite" style="text-align:center;margin-top:12px">No card charged. We confirm artwork &amp; final price before anything is made.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    var COLORS = [
+      { n:"Blackout",    bg:"#15151f", ink:"#f4f6fb" },
+      { n:"Beast Green", bg:"#b6ff2e", ink:"#070b02" },
+      { n:"Beast Blue",  bg:"#2f86ff", ink:"#ffffff" },
+      { n:"Beast Red",   bg:"#ff332a", ink:"#ffffff" },
+      { n:"White",       bg:"#f4f6fb", ink:"#0a0a0a" },
+      { n:"Violet",      bg:"#9a6bff", ink:"#ffffff" },
+      { n:"Orange",      bg:"#ff6a1a", ink:"#ffffff" },
+      { n:"Cyan",        bg:"#22d3ee", ink:"#04181c" }
+    ];
+    var TRIMS = [
+      { n:"Green",  bg:"#b6ff2e" }, { n:"Blue", bg:"#2f86ff" }, { n:"Red", bg:"#ff332a" },
+      { n:"White",  bg:"#f4f6fb" }, { n:"Gold", bg:"#ffc14d" }, { n:"Black", bg:"#0d0d13" }
+    ];
+
+    var state = {
+      style:"Jersey", name:"BEAST", num:"01",
+      color:COLORS[0], trim:TRIMS[0],
+      gfx:"Phoenix target", collar:"Crew", sleeve:"Short",
+      sport:"Darts", size:"M", qty:1
+    };
+
+    var $ = function (s) { return document.querySelector(s); };
+    var $$ = function (s) { return Array.from(document.querySelectorAll(s)); };
+    var money = function (c) { return "$" + (c / 100).toFixed(2).replace(/\.00$/, ""); };
+
+    /* ---------- price ---------- */
+    function priceEstimate() {
+      var base = state.style === "Tee" ? 3600 : 6900;
+      if (state.sleeve === "Long") base += 800;
+      if (state.collar === "Zip") base += 600;
+      if (state.sport === "BMX") base += 500;
+      return base;
+    }
+
+    /* ---------- chest graphics ---------- */
+    function gfxMarkup(trim, ink) {
+      switch (state.gfx) {
+        case "Phoenix target":
+          return '<g opacity="0.9">' +
+            '<circle cx="220" cy="352" r="66" fill="none" stroke="' + trim + '" stroke-width="7"/>' +
+            '<circle cx="220" cy="352" r="42" fill="none" stroke="' + ink + '" stroke-width="6" opacity=".55"/>' +
+            '<circle cx="220" cy="352" r="18" fill="' + trim + '"/>' +
+            '</g>';
+        case "Bolt":
+          return '<path d="M244 282 L192 366 L218 366 L200 428 L256 340 L228 340 Z" fill="' + trim + '" opacity="0.92"/>';
+        case "Claw marks":
+          return '<g fill="' + trim + '" opacity="0.9">' +
+            '<path d="M168 292 L186 300 L232 420 L216 424 Z"/>' +
+            '<path d="M204 284 L222 290 L256 412 L240 417 Z"/>' +
+            '<path d="M240 280 L258 284 L282 400 L266 406 Z"/>' +
+            '</g>';
+        default: return "";
+      }
+    }
+
+    /* ---------- render the mascot ---------- */
+    var elPrice = $("#price"), aura = $("#stage-aura");
+    function render() {
+      var c = state.color.bg, ink = state.color.ink, trim = state.trim.bg;
+
+      ["#shirt-body", "#sleeve-l", "#sleeve-r", "#sleeve-l-long", "#sleeve-r-long"].forEach(function (s) {
+        var el = $(s); if (el) el.setAttribute("fill", c);
+      });
+      $$("#shirt .trim").forEach(function (el) { el.setAttribute("fill", trim); });
+
+      /* collar variants */
+      $("#collar-crew").style.display = state.collar === "Crew" ? "" : "none";
+      $("#collar-v").style.display = state.collar === "V-neck" ? "" : "none";
+      $("#collar-zip").style.display = state.collar === "Zip" ? "" : "none";
+
+      /* sleeve variants */
+      var sleeveless = state.sleeve === "Sleeveless", longS = state.sleeve === "Long";
+      ["#sleeve-l", "#sleeve-r", "#cuff-l", "#cuff-r"].forEach(function (s) { $(s).style.display = sleeveless ? "none" : ""; });
+      $("#sleeve-l-long").style.display = longS ? "" : "none";
+      $("#sleeve-r-long").style.display = longS ? "" : "none";
+      if (longS) { $("#cuff-l").style.display = "none"; $("#cuff-r").style.display = "none"; }
+
+      /* print */
+      $("#gfx").innerHTML = gfxMarkup(trim, ink);
+      var name = (state.name || "BEAST").toUpperCase();
+      var pn = $("#p-name");
+      pn.textContent = name;
+      pn.setAttribute("fill", ink);
+      pn.setAttribute("font-size", name.length > 8 ? 19 : 24);
+      var num = $("#p-num");
+      num.textContent = state.num || "00";
+      num.setAttribute("fill", ink);
+      num.setAttribute("opacity", state.gfx === "None" ? "1" : "0.96");
+
+      elPrice.textContent = money(priceEstimate());
+      if (aura) aura.style.background = "radial-gradient(closest-side, " + c + "33, transparent 70%)";
+    }
+
+    /* ---------- swatch rows ---------- */
+    function buildSwatches(rootId, list, key) {
+      var root = document.getElementById(rootId);
+      root.innerHTML = list.map(function (o, i) {
+        return '<button type="button" class="swatch" role="radio" aria-checked="' + (i === 0 ? "true" : "false") +
+          '" aria-label="' + o.n + '" title="' + o.n + '" style="--sw:' + o.bg + '"></button>';
+      }).join("");
+      root.addEventListener("click", function (e) {
+        var b = e.target.closest(".swatch"); if (!b) return;
+        var idx = Array.prototype.indexOf.call(root.children, b);
+        state[key] = list[idx];
+        Array.prototype.forEach.call(root.children, function (x) { x.setAttribute("aria-checked", x === b ? "true" : "false"); });
+        render();
+      });
+    }
+    buildSwatches("colors", COLORS, "color");
+    buildSwatches("trims", TRIMS, "trim");
+
+    /* ---------- option button rows ---------- */
+    var KEYMAP = { style:"style", gfx:"gfx", collar:"collar", sleeve:"sleeve", sport:"sport", size:"size" };
+    $$("[data-opt]").forEach(function (row) {
+      row.addEventListener("click", function (e) {
+        var b = e.target.closest(".opt"); if (!b) return;
+        row.querySelectorAll(".opt").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        state[KEYMAP[row.dataset.opt]] = b.textContent.trim();
+        render();
+      });
+    });
+
+    /* ---------- text inputs ---------- */
+    $("#bname").addEventListener("input", function () { state.name = this.value.replace(/[^a-zA-Z0-9 .\-']/g, ""); this.value = state.name; render(); });
+    $("#bnum").addEventListener("input", function () { state.num = this.value.replace(/\D/g, "").slice(0, 2); this.value = state.num; render(); });
+    $("#bqty").addEventListener("input", function () { state.qty = Math.max(1, Math.min(99, parseInt(this.value, 10) || 1)); });
+
+    /* ---------- summary line for cart/email ---------- */
+    function specLine() {
+      return state.color.n + "/" + state.trim.n + " · " + (state.name || "BEAST").toUpperCase() + " " + (state.num || "00") +
+        " · " + state.gfx + " · " + state.collar + " · " + state.sleeve + " sleeve · " + state.sport;
+    }
+
+    /* ---------- add to bag ---------- */
+    $("#add-bag").addEventListener("click", function () {
+      window.TBC_addCustom({
+        name: "Custom " + state.style + " — " + (state.name || "BEAST").toUpperCase() + " " + (state.num || "00"),
+        price: priceEstimate(),
+        spec: specLine(),
+        size: state.size,
+        qty: state.qty,
+        sport: state.sport
+      });
+    });
+
+    /* ---------- request a quote (email) ---------- */
+    document.getElementById("builder").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = $("#bemail").value.trim();
+      var body =
+        "I designed a custom " + state.style.toLowerCase() + " in Creator Mode:\n\n" +
+        "- Style: " + state.style + "\n" +
+        "- Base / trim: " + state.color.n + " / " + state.trim.n + "\n" +
+        "- Name & number: " + (state.name || "BEAST").toUpperCase() + " " + (state.num || "00") + "\n" +
+        "- Chest graphic: " + state.gfx + "\n" +
+        "- Collar: " + state.collar + " · Sleeve: " + state.sleeve + "\n" +
+        "- Sport: " + state.sport + " · Size: " + state.size + " · Qty: " + state.qty + "\n" +
+        "- Estimated: " + money(priceEstimate() * state.qty) + "\n\n" +
+        (email ? "Reply to: " + email + "\n\n" : "") +
+        "Notes:\n";
+      window.location.href = "mailto:info@teambclothing.com?subject=" +
+        encodeURIComponent("Team Beast Clothing - Custom design quote") +
+        "&body=" + encodeURIComponent(body);
+      window.TBC_toast && window.TBC_toast("Opening your email — we'll confirm artwork & quote");
+    });
+
+    /* ---------- save design as PNG ---------- */
+    $("#save-png").addEventListener("click", function () {
+      var svg = document.getElementById("beast-svg");
+      var xml = new XMLSerializer().serializeToString(svg);
+      var svg64 = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(xml);
+      var img = new Image();
+      img.onload = function () {
+        var cnv = document.createElement("canvas");
+        cnv.width = 880; cnv.height = 1200;
+        var ctx = cnv.getContext("2d");
+        ctx.fillStyle = "#07070c"; ctx.fillRect(0, 0, cnv.width, cnv.height);
+        ctx.drawImage(img, 0, 0, cnv.width, cnv.height);
+        ctx.fillStyle = "rgba(245,246,251,0.5)";
+        ctx.font = "700 26px Oswald, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("TEAM BEAST · CREATOR MODE", cnv.width / 2, cnv.height - 34);
+        var a = document.createElement("a");
+        a.download = "team-beast-custom-" + (state.name || "beast").toLowerCase().replace(/\s+/g, "-") + ".png";
+        a.href = cnv.toDataURL("image/png");
+        a.click();
+        window.TBC_toast && window.TBC_toast("Design saved");
+      };
+      img.onerror = function () { window.TBC_toast && window.TBC_toast("Couldn't render the image — try again"); };
+      img.src = svg64;
+    });
+
+    render();
+  })();
+  </script>
+</body>
+</html>
