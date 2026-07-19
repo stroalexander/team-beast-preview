@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop the Drop | Team Beast Clothing — Jerseys, Tees, Kits</title>
+  <meta name="description" content="Shop Team Beast Clothing — custom-sublimated dart & BMX jerseys, DTF tees & hoodies, caps, and team kits. Hit the mark." />
+  <meta name="theme-color" content="#07070c" />
+  <link rel="icon" type="image/png" href="assets/vending/team-beast-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="clothing.css" />
+</head>
+<body>
+
+  <header class="tbc-bar">
+    <a class="brand" href="clothing.html" aria-label="Team Beast Clothing home"><img src="assets/vending/team-beast-logo.png" alt="" /><b>Team Beast</b></a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="index.html" class="nav-hq" aria-label="Back to the Team Beast entry">⌂ Beast HQ</a>
+      <a href="clothing-merch.html" aria-current="page">Shop</a>
+      <a href="clothing-creator.html">Create</a>
+      <a href="clothing-sponsored.html">Roster</a>
+      <a href="clothing-about.html">About</a>
+      <a href="clothing-contact.html">Contact</a>
+      <button class="cart-btn" aria-label="Open bag">Bag <span class="count" data-n="0"></span></button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <img class="wm" src="base_textfree.png" alt="" style="object-position:50% 35%" />
+    <div class="inner">
+      <p class="eyebrow">This week's drop</p>
+      <h1>Wear <i>every</i> win.</h1>
+      <p>Custom-sublimated jerseys, DTF tees and hoodies, and team kits — built to be worn at the oche, on the track, and on camera. Want your own name &amp; number? <a href="clothing-creator.html" style="color:var(--green);text-decoration:underline">Build your kit →</a></p>
+    </div>
+  </section>
+
+  <main class="wrap section">
+    <div class="cat-row" id="filters">
+      <button class="cat" data-c="all" aria-pressed="true">All</button>
+      <button class="cat" data-c="Darts" aria-pressed="false">Darts</button>
+      <button class="cat" data-c="BMX" aria-pressed="false">BMX</button>
+      <button class="cat" data-c="Team" aria-pressed="false">Team &amp; Merch</button>
+    </div>
+    <div class="shop-grid" id="grid"></div>
+    <p class="form-note" style="margin-top:24px">No card is charged here — add what you want and hit <b>Request order</b>; we reply with a quote and how to pay. Custom names &amp; numbers welcome.</p>
+  </main>
+
+  <footer class="tbc-foot">
+    <div class="foot-grid">
+      <div class="foot-brand"><b>Team Beast <span class="grad-g">Clothing</span></b><p>Custom-sublimated kits & DTF apparel. A RamLyn brand, Auburn, Washington.</p></div>
+      <div class="foot-col"><h4>Shop</h4><a href="clothing-merch.html">Merch</a><a href="clothing-creator.html">Creator</a><a href="clothing-sponsored.html">Roster</a></div>
+      <div class="foot-col"><h4>Team Beast</h4><a href="clothing-about.html">About</a><a href="clothing-contact.html">Contact</a><a href="vending.html">Vending</a></div>
+      <div class="foot-col"><h4>Connect</h4><a href="https://www.instagram.com/officialteambeastclothing/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@teambclothing" rel="noopener">TikTok</a><a href="mailto:info@teambclothing.com">info@teambclothing.com</a></div>
+    </div>
+    <div class="foot-legal"><p>© <span data-year>2026</span> Team Beast Clothing · RamLyn · Auburn, WA</p><p>Hit the mark.</p></div>
+  </footer>
+
+  <script src="clothing.js"></script>
+  <script>
+  (function () {
+    var CAT = window.TBC_CATALOG || {};
+    var grid = document.getElementById("grid");
+    var SIZES = ["S", "M", "L", "XL", "2XL"];
+    var money = function (c) { return "$" + (c / 100).toFixed(2).replace(/\.00$/, ""); };
+    var entries = Object.keys(CAT).map(function (id) { return Object.assign({ id: id }, CAT[id]); });
+
+    function card(p) {
+      var chips = SIZES.map(function (s, i) { return '<button data-size="' + s + '" aria-pressed="' + (i === 1 ? "true" : "false") + '">' + s + '</button>'; }).join("");
+      var href = "clothing-product.html?id=" + p.id;
+      var img = p.img ? p.img : "base_textfree.png";
+      return '<article class="prod" data-sport="' + p.sport + '">' +
+        '<a class="ph" href="' + href + '" aria-label="' + p.name + ' — read the story">' +
+        '<img class="wm" src="' + img + '" alt=""><span class="tag">' + p.sport + '</span><span class="no">' + p.no + '</span></a>' +
+        '<div class="body"><h3><a href="' + href + '">' + p.name + '</a></h3><span class="spec">' + p.spec + '</span>' +
+        '<div class="sizes" data-id="' + p.id + '">' + chips + '</div>' +
+        '<div class="row"><span class="price">' + money(p.price) + '<small>USD</small></span>' +
+        '<button class="btn btn-sm btn-primary" data-add="' + p.id + '">Add to bag</button></div>' +
+        '<a class="story-link" href="' + href + '">Read the story →</a></div></article>';
+    }
+    function render(cat) {
+      var list = cat === "all" ? entries : entries.filter(function (p) { return p.sport === cat; });
+      grid.innerHTML = list.map(card).join("");
+      grid.querySelectorAll(".sizes").forEach(function (g) {
+        g.addEventListener("click", function (e) {
+          var b = e.target.closest("button"); if (!b) return;
+          g.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        });
+      });
+      grid.querySelectorAll("[data-add]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var pc = btn.closest(".prod");
+          var sel = pc.querySelector('.sizes button[aria-pressed="true"]');
+          window.TBC_addToCart(btn.dataset.add, sel ? sel.dataset.size : "M", 1);
+        });
+      });
+    }
+    // Deep-link support: clothing-merch.html?cat=Darts|BMX|Team pre-selects a filter.
+    var initCat = new URLSearchParams(location.search).get("cat");
+    var VALID = { Darts: 1, BMX: 1, Team: 1 };
+    if (initCat && VALID[initCat]) {
+      document.querySelectorAll("#filters .cat").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.c === initCat ? "true" : "false"); });
+      render(initCat);
+    } else {
+      render("all");
+    }
+    var filters = document.getElementById("filters");
+    filters.addEventListener("click", function (e) {
+      var b = e.target.closest(".cat"); if (!b) return;
+      filters.querySelectorAll(".cat").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render(b.dataset.c);
+    });
+  })();
+  </script>
+</body>
+</html>
